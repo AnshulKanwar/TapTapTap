@@ -13,6 +13,9 @@ struct MainView: View {
     @State var isOver = false
     @State var winner = ""
     
+    @State var isStart = false
+    @State var countdown = 3
+    
     var redHeight: Double {
         fraction * viewHeight
     }
@@ -49,6 +52,10 @@ struct MainView: View {
                 .onAppear {
                     viewHeight = geo.size.height
                 }
+                
+                if !isStart {
+                    CountdownView(countdown: $countdown, isStart: $isStart)
+                }
             }
         }
         .ignoresSafeArea()
@@ -60,6 +67,8 @@ struct MainView: View {
                     isOver = false
                     fraction = 0.5
                     winner = ""
+                    isStart = false
+                    countdown = 3
                 })
             )
         }
